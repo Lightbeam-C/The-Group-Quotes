@@ -5,8 +5,22 @@ import { createClient } from '@supabase/supabase-js'
 // Initialize Supabase (Use your own URL/KEY from your project settings!)
 const supabase = createClient('https://supabase.com/dashboard/project/qyopevrsgdidmvnjhdxs', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5b3BldnJzZ2RpZG12bmpoZHhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3MTQ0MDAsImV4cCI6MjA5ODI5MDQwMH0.9r1YOjgGV4Kp6QrNKdTjfALoaZ2L56QUcL74PSvGQ_U')
 
+interface Quote {
+  id: number;
+  quote_text: string;
+}
+
+
+
 export default function Home() {
-  const [quotes, setQuotes] = useState([])
+  
+  const [quotes, setQuotes] = useState<Quote[]>([]); 
+
+  async function fetchQuotes() {
+    const { data } = await supabase.from('quotes').select('*');
+    // 3. Cast the data as Quote[] so TypeScript is happy
+    setQuotes((data as Quote[]) || []);
+  }
   const [text, setText] = useState('')
 
   // 1. Load quotes when the page opens
@@ -14,10 +28,6 @@ export default function Home() {
     fetchQuotes()
   }, [])
 
-  async function fetchQuotes() {
-    const { data } = await supabase.from('quotes').select('*')
-    setQuotes(data || [])
-  }
 
   // 2. Add a new quote
   async function addQuote() {
