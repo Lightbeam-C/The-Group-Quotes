@@ -13,24 +13,8 @@ interface Quote {
 
 
 export default function Home() {
-  
-  const router = useRouter()
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    async function checkUser() {
-      const { data } = await supabase.auth.getSession()
-    
-      if (!data.session) {
-        router.push('/login')
-      } else {
-        setLoading(false )
-      } 
-    }
-    checkUser()
-  }, [router])
   const [quotes, setQuotes] = useState<Quote[]>([]); 
-
   async function fetchQuotes() {
     const { data } = await supabase.from('quotes').select('*');
     setQuotes((data as Quote[]) || []);
@@ -50,7 +34,7 @@ export default function Home() {
 
   return (
     <main style={{ padding: '2rem' }}>
-      <h1>Friend Quotes</h1>
+      <h1>Login Page</h1>
       
       {/* The Input Form */}
       <input 

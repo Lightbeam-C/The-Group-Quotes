@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Group Quotes",
-  description: "Quotes for 'The Group'",
+  title: "The Group - Login",
+  description: "Login to The Group Quotes",
 };
 
 export default function RootLayout({
