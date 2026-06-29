@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { createClient } from '@supabase/supabase-js'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation'
 
 const supabase = createClient('https://supabase.com/dashboard/project/qyopevrsgdidmvnjhdxs', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5b3BldnJzZ2RpZG12bmpoZHhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3MTQ0MDAsImV4cCI6MjA5ODI5MDQwMH0.9r1YOjgGV4Kp6QrNKdTjfALoaZ2L56QUcL74PSvGQ_U')
 
