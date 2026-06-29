@@ -10,8 +10,6 @@ interface Quote {
   quote_text: string;
 }
 
-
-
 export default function Home() {
   
   const router = useRouter()
