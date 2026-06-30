@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient('https://supabase.com/dashboard/project/qyopevrsgdidmvnjhdxs', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5b3BldnJzZ2RpZG12bmpoZHhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3MTQ0MDAsImV4cCI6MjA5ODI5MDQwMH0.9r1YOjgGV4Kp6QrNKdTjfALoaZ2L56QUcL74PSvGQ_U')
-
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co/rest/v1/', supabaseKey)
 interface Quote {
   id: number;
   quote_text: string;
