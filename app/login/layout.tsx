@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "The Group - Login",
   description: "Login to The Group Quotes",
+  icons: {
+    icon: '/favicon.png?v=2'
+  },
 };
 
 export default function RootLayout({

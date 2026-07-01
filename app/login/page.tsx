@@ -3,50 +3,70 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseKey = process.env.SUPABASE_KEY
-const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co/rest/v1/', supabaseKey)
-interface Quote {
-  id: number;
-  quote_text: string;
-}
+const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co', 'sb_publishable_38L9uCp00cE65PQBLFtYVA_rrUMFLBx')
+
+
 
 export default function Home() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  const [quotes, setQuotes] = useState<Quote[]>([]); 
-  async function fetchQuotes() {
-    const { data } = await supabase.from('quotes').select('*');
-    setQuotes((data as Quote[]) || []);
+  const login = async (email: string, password: string, e: React.FormEvent) => {
+    e.preventDefault()
+    const {data, error} = await supabase.auth.signInWithPassword({email: email, password: password})
+    
+    if (error) {
+      setError(error.message)
+      setPassword('')
+    }
   }
-  const [text, setText] = useState('')
-
-  useEffect(() => {
-    fetchQuotes()
-  }, [])
-
-
-  async function addQuote() {
-    await supabase.from('quotes').insert([{ quote_text: text }])
-    setText('') // clear input
-    fetchQuotes() // refresh list
-  }
-
+  
   return (
-    <main style={{ padding: '2rem' }}>
-      <h1>Login Page</h1>
-      
-      {/* The Input Form */}
-      <input 
-        value={text} 
-        onChange={(e) => setText(e.target.value)} 
-        placeholder="Enter a quote..." 
-      />
-      <button onClick={addQuote}>Add Quote</button>
-
-      {/* The List */}
-      <ul>
-        {quotes.map((q) => (
-          <li key={q.id}>{q.quote_text}</li>
-        ))}
-      </ul>
-    </main>
+    <div className='flex flex-col items-center justify-center min-h-screen min-w-screen' >
+      <embed type='image/png' src='/TheGroupLogo.png' width='100' height='100'/>
+      <h1 className='text-lg'>Sign in to The Group</h1>
+      <p><br></br></p>
+      {error && 
+        <div className='flex flex-row space-x-2 items-center'>
+          <p className='text-red-500 mt-2'>{error}</p>
+        </div>
+      } 
+      <div className='w-full min-w-[px] max-w-[350] p-4 mx-auto'>
+        <form onSubmit={(e) => {login(email, password, e)}}>
+          <div className='flex flex-col items-left justify-left '>
+            <label htmlFor='email'>Email:</label>
+            <input 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              id='email' 
+              type='email' 
+              autoComplete="email" 
+              className='border rounded-md border-solid border-b-white h-[40] w-full p-4 mx-auto'
+              required
+            />
+          </div>
+          <p className='h-[15]'><br></br></p>
+          <div className='flex flex-col items-left justify-left'>
+            <label htmlFor='email'>Password:</label>
+            <input 
+              value={password} onChange={(e) => setPassword(e.target.value)} 
+              id='password' 
+              type='password' 
+              autoComplete="password" 
+              className='border rounded-md border-solid border-b-white h-[40] w-full p-4 mx-auto'
+              required
+            />
+          </div>
+          <p className='h-[15]'><br></br></p>
+          <input 
+          type='submit' 
+          value='Sign In'
+          className='bg-green-700 h-[40] w-full min-w-[280px] max-w-[400] mx-auto rounded-md text-center align-middle hover:bg-green-600 transition'
+          />
+        </form>
+      </div>
+      <p>Don't have an account yet? Sign up</p>
+    </div>
   )
 }
