@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseKey = process.env.SUPABASE_KEY
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co', supabaseKey!)
 
 
