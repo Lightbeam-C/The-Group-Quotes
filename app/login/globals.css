@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.browsercolor {
+  border-color: black;
+  color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  .browsercolor {
+    border-color: white;
+    color: white;
+  }
+}

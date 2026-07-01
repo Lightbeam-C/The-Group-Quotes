@@ -46,7 +46,7 @@ export default function Home() {
               id='email' 
               type='email' 
               autoComplete="email" 
-              className='border rounded-md border-solid border-b-white h-[40] w-full p-4 mx-auto'
+              className='border rounded-md border-solid browsercolor h-[40] w-full p-4 mx-auto'
               required
             />
           </div>
@@ -58,7 +58,7 @@ export default function Home() {
               id='password' 
               type='password' 
               autoComplete="password" 
-              className='border rounded-md border-solid border-b-white h-[40] w-full p-4 mx-auto'
+              className='border rounded-md border-solid browsercolor h-[40] w-full p-4 mx-auto'
               required
             />
           </div>
@@ -66,7 +66,7 @@ export default function Home() {
           <input 
           type='submit' 
           value='Sign Up'
-          className='bg-green-700 h-[40] w-full min-w-[280px] max-w-[400] mx-auto rounded-md text-center align-middle hover:bg-green-600 transition'
+          className='bg-[#238636] text-white h-[40] w-full min-w-[280px] max-w-[400] mx-auto rounded-md text-center align-middle hover:bg-[#29903b] transition'
           />
         </form>
       </div>
