@@ -16,7 +16,7 @@ export default function Home() {
 
   const login = async (email: string, password: string, e: React.FormEvent) => {
     e.preventDefault()
-    const {data, error} = await supabase.auth.signInWithPassword({email: email, password: password})
+    const {data, error} = await supabase.auth.signUp({email: email, password: password})
     
     if (error) {
       setError(error.message)
@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen min-w-screen' >
       <embed type='image/png' src='/TheGroupLogo.png' width='100' height='100'/>
-      <h1 className='text-lg'>Sign in to The Group</h1>
+      <h1 className='text-lg'>Sign up to The Group</h1>
       <p><br></br></p>
       {error && 
         <div className='flex flex-row space-x-2 items-center'>
@@ -65,12 +65,12 @@ export default function Home() {
           <p className='h-[15]'><br></br></p>
           <input 
           type='submit' 
-          value='Sign In'
+          value='Sign Up'
           className='bg-green-700 h-[40] w-full min-w-[280px] max-w-[400] mx-auto rounded-md text-center align-middle hover:bg-green-600 transition'
           />
         </form>
       </div>
-      <p>Don't have an account yet? <a href='/signup'> Sign Up!</a></p>
+      <p>Already have an account? <a href='/login'> Log in!</a></p>
     </div>
   )
 }
