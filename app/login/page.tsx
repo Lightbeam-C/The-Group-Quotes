@@ -70,7 +70,7 @@ export default function Home() {
           />
         </form>
       </div>
-      <p>Don't have an account yet? <a href='/signup'> Sign Up!</a></p>
+      <p>Don't have an account yet? <a href='/signup'  className='text-blue-600 hover:underline'> Sign Up!</a></p>
     </div>
   )
 }

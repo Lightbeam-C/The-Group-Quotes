@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Group - Login",
-  description: "Login to The Group Quotes",
+  title: "The Group - Sign up",
+  description: "Sign up to The Group Quotes",
   icons: {
     icon: '/favicon.png?v=2'
   },
