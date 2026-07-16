@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
 
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
-const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co', supabaseKey!)
+const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co', 'sb_publishable_9VlSAFNLdM7T6BLjkrXzWQ_h7lAuXqM')
 
 interface Quote {
   id: number;
@@ -28,7 +28,7 @@ export default function Home() {
     }
     checkUser()
   }, [router])
-  if (loading) return <p>Loading...</p>
+
 
   const [quotes, setQuotes] = useState<Quote[]>([]); 
 
@@ -48,6 +48,8 @@ export default function Home() {
     setText('') // clear input
     fetchQuotes() // refresh list
   }
+
+  if (loading) return <p>Loading...</p>
 
   return (
     <main style={{ padding: '2rem' }}>
