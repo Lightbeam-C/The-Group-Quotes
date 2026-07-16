@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
 
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
-const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co', 'sb_publishable_9VlSAFNLdM7T6BLjkrXzWQ_h7lAuXqM')
+const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co', supabaseKey!)
 
 interface Quote {
   id: number;
