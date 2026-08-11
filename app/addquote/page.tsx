@@ -16,6 +16,10 @@ interface CustomDropdownProps {
 }
 
 export default function Home() {
+    const currentDate = new Date()
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' })
+    const currentYear = currentDate.toLocaleString('default', { year: 'numeric' })
+
     const router = useRouter()
     const pathname = usePathname()
     const [quoteParts, setQuoteParts] = useState([{ text:"", person:''}])
@@ -24,13 +28,27 @@ export default function Home() {
     const [isOpenType, setIsOpenType] = useState(false)
     const [isOpenMonth, setIsOpenMonth] = useState(false)
     const [isOpenYear, setIsOpenYear] = useState(false)
-    const [month, setMonth] = useState("")
-    const [year, setYear] = useState<number>()
+    const [month, setMonth] = useState(currentMonth)
+    const [year, setYear] = useState(Number(currentYear))
+    const [success, setSuccess] = useState(false)
 
-    const people = ['Zico', 'Cadence', 'Griffin', 'James'];
+    const people = ['Zico', 'Alexis', 'Cadence', 'James', 'Griffin', 'Rhys', 'Thomas', 'Inspirobot', 'Everyone', 'Hezekiah', 'Jakob', 'Other'];
     const types = ['Sus', 'Non Sus', 'Misheard']
     const years = [2026, 2027, 2028, 2029]
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    useEffect(() => {
+          if (success) {
+              setSuccess(true);
+
+            const timer = setTimeout(() => {
+            setSuccess(false);
+          }, 3000);
+
+
+          return () => clearTimeout(timer);
+        }
+        }, [success]);
     
     function handleTextareaChange(part:number, e: React.ChangeEvent<HTMLTextAreaElement>) {
         const extraArray = [...quoteParts]
@@ -46,6 +64,12 @@ export default function Home() {
         const combinedPeople = quoteParts.map(part=>part.person).join("|")
 
         const { error } = await supabase.from('quotes').insert({quoted_person:combinedPeople, quote:combinedText, type:type, month:month, year:year})
+
+        if (error){
+
+        } else {
+          setSuccess(true)
+        }
     }
     function addQuotePart(){
         const extraArray = [...quoteParts]
@@ -72,6 +96,19 @@ export default function Home() {
                 <div className="flex flex-col items-start w-full px-4 space-y-1">
                     <form onSubmit={(e) => addQuote(e)} className='flex flex-col items-start w-full px-4 space-y-1'>
                         <h1 className='text-3xl'>Add Quotes</h1>
+                        <div
+                          className={`transition-all duration-350 ease-in-out grid ${
+                            success
+                              ? "grid-rows-[1fr] opacity-100 mb-2" 
+                              : "grid-rows-[0fr] opacity-0 mb-0 pointer-events-none"
+                          }`}
+                        >
+                          <div className="overflow-hidden">
+                            <span className="text-md text-green-500 font-medium">
+                              Success!
+                            </span>
+                          </div>
+                        </div>
                         {quoteParts.map(({text, person}, index) => (
                             <div className="flex flex-row w-full" key={index}>
                                 <textarea 
@@ -103,7 +140,7 @@ export default function Home() {
                                         </button>
                                         {isOpen[index] && (
                                             <div className="absolute top-full mt-1 w-full bg-blue-500 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-20">
-                                            <div className="max-h-60 overflow-y-auto">
+                                            <div className="max-h-40 overflow-y-auto">
                                                 {people.map((option) => (
                                                 <button
                                                     key={option}
