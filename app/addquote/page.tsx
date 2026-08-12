@@ -69,12 +69,15 @@ export default function Home() {
 
         } else {
           setSuccess(true)
+          setQuoteParts([{ text: "", person:""}])
         }
     }
     function addQuotePart(){
+      if (quoteParts.length < 5) {
         const extraArray = [...quoteParts]
         extraArray.push({text:'', person:''})
         setQuoteParts(extraArray)
+      }
     }
     
     function removeQuotePart(index: number) {
@@ -84,6 +87,7 @@ export default function Home() {
             setQuoteParts(extraArray)
         }
     }
+
     return (
         <div className="h-screen w-screen flex flex-row">
             <div className="flex flex-col items-center p-3 h-[calc(100vh-20px)] bg-[#181A39] w-56 my-[10px] rounded-r-4xl">
@@ -118,7 +122,7 @@ export default function Home() {
                                     rows={1}
                                     placeholder='Enter your quote...'
                                 />
-                                <div className='flex-1 h-full flex flex-row space-x-1 items-end'>
+                                <div className='flex-1 h-full flex flex-row space-x-1 items-center justify-end'>
                                     <div className="relative w-30">
                                         <button
                                             type="button"
@@ -140,7 +144,7 @@ export default function Home() {
                                         </button>
                                         {isOpen[index] && (
                                             <div className="absolute top-full mt-1 w-full bg-blue-500 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-20">
-                                            <div className="max-h-40 overflow-y-auto">
+                                            <div className="max-h-50 overflow-y-auto">
                                                 {people.map((option) => (
                                                 <button
                                                     key={option}
@@ -192,7 +196,7 @@ export default function Home() {
                                     </button>
                                     {isOpenMonth && (
                                         <div className="absolute top-full mt-1 w-full bg-yellow-400 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-20">
-                                        <div className="max-h-40 overflow-y-auto">
+                                        <div className="max-h-50 overflow-y-auto">
                                             {months.map((option) => (
                                             <button
                                                 key={option}
