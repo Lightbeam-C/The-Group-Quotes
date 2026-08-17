@@ -1,59 +1,24 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { createClient } from '@supabase/supabase-js'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import { Plus, House, TextAlignStart, ChevronDown, Minus} from 'lucide-react'
 import Link from 'next/link';
-import { Plus, House, TextAlignStart } from 'lucide-react'
 
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 const supabase = createClient('https://qyopevrsgdidmvnjhdxs.supabase.co', supabaseKey!)
 
-interface Quote {
-  id: number;
-  quote_text: string;
+interface CustomDropdownProps {
+  options: string[];
+  selected: string;
+  onSelect: (option: string) => void;
+  placeholder?: string;
 }
 
 export default function Home() {
-  
-  const router = useRouter()
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function checkUser() {
-      const { data } = await supabase.auth.getSession()
-    
-      if (!data.session) {
-        router.push('/login')
-      } else {
-        setLoading(false )
-      } 
-    }
-    checkUser()
-  }, [router])
-
-
-  const [quotes, setQuotes] = useState<Quote[]>([]); 
-
-  async function fetchQuotes() {
-    const { data } = await supabase.from('quotes').select('*');
-    setQuotes((data as Quote[]) || []);
-  }
-  const [text, setText] = useState('')
-
-  useEffect(() => {
-    fetchQuotes()
-  }, [])
-
-
-  async function addQuote() {
-    await supabase.from('quotes').insert([{ quote_text: text }])
-    setText('') // clear input
-    fetchQuotes() // refresh list
-  }
-
-  if (loading) return <p>Loading...</p>
-
-  return (
+    const router = useRouter()
+    const pathname = usePathname()
+    return (
         <div className="h-screen w-screen flex flex-row">
             <div className="flex flex-col items-center p-3 h-[calc(100vh-20px)] bg-[#181A39] w-56 my-[10px] rounded-r-4xl">
                 <SidebarButton label="Home" icon={<House size={20} />} href='/'/>

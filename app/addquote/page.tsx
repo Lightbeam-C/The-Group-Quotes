@@ -94,7 +94,7 @@ export default function Home() {
                 <SidebarButton label="Home" icon={<House size={20} />} href='/'/>
                 <SidebarLine label="Quotes"/>
                 <SidebarButton label="Add Quote" icon={<Plus size={20} />} href='/addquote'/>
-                <SidebarButton label="View Quotes" icon={<TextAlignStart size={20}/>} href='/'/>
+                <SidebarButton label="View Quotes" icon={<TextAlignStart size={20}/>} href='/viewquotes'/>
             </div>
             <div className="flex flex-col items-center justify-center flex-1 bg-[#181A39] m-[10px] rounded-lg">
                 <div className="flex flex-col items-start w-full px-4 space-y-1">
